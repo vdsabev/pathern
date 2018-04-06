@@ -1,0 +1,23 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "pretty": true,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": false,
+
+    "baseUrl": "./",
+    "declaration": true,
+    "module": "umd",
+    "moduleResolution": "node",
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
+}
