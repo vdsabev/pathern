@@ -1,7 +1,25 @@
 {
+  "version": "0.1.1",
   "name": "pathern",
-  "version": "0.1.0",
+  "description": "Minimalistic path pattern matching",
+  "keywords": [
+    "path",
+    "pattern",
+    "pathern",
+    "match",
+    "router",
+    "route"
+  ],
+  "repository": "vdsabev/pathern",
+  "author": {
+    "name": "Vladimir Sabev",
+    "url": "https://vdsabev.com"
+  },
   "license": "MIT",
+  "main": "index.min.js",
+  "jsnext:main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
