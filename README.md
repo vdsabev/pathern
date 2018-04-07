@@ -22,8 +22,8 @@ import * as pathern from 'pathern';
 
 ## replace
 ```ts
-pathern.replace('postContent/:postId', '1');                // 'postContent/1'
-pathern.replace('postContent/:postId', { postId: '1' });    // 'postContent/1'
+pathern.replace('posts/:postId', '1');                      // 'posts/1'
+pathern.replace('posts/:postId', { postId: '1' });          // 'posts/1'
 pathern.replace(':a/:b/:c', { a: '1', b: '2', c: '3' });    // '1/2/3'
 pathern.replace('$a\\$b\\$c', { a: '1', b: '2', c: '3' }, { // '1/2/3'
   prefix: '$',
