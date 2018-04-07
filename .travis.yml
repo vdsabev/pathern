@@ -4,14 +4,24 @@ node_js: 8
 
 branches:
   only:
-    - master
+  - master
 
 cache:
   directories:
-    - node_modules
+  - node_modules
 
 script:
-  - npm test
+- npm test
+- npm run build
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: npm
+  email: vdsabev@gmail.com
+  api_key:
+    secure: BaH0otr1Oxf0rv6c5nN9zQ7J0XiDuhyJUUndhaltZqqVP6/AbcCPJJepa3iyfGQgRUcljvDGyf9gk9FhDdENPTjaQHQ+13mKw2jHMlzgZw5Z2gMKZjnQkXjOZpqirUqrcTkyMgtetml2WXOvvzSVfj5pi0Qps5tgLAacFq8DFZpW6TvTxsKgPc+r2YzeLwIaXnhE7jyfjh39V0i5xAksmlHETn9zIsPauc9umcjZJShsh+1CJeOPfo9I0/+wfRHrDZuC8XI5rsbotlJwpx3zTV7wjNRQa1QkD9lVU/78Na5tI80hVyiVEutWFOsfkUyNwT2oHkRBW76KabQWFN8P0UFrzHWAch//hTSQnB+eOrBuFF9B/tmL7Ipgr5Vg6hSqlDFS6VUimG8NivoreKcAIp0wH/5QoO8PeR7Wu7AHgnv3WYRW4wUM9w4/ZGLZyj/xseBBNjsFtieAJXh0uoL++vbe9aNgibPkR5k1WY8Ol73bTK3AjWENETSwBfdoKZLueaevzujKbZnszdSdpwWROBqMICFf72WJRGGPhUhqdZbVtlVV/9CTn7TZbvkjwb4uxNjaW0xhJXqYVKRTm/aCZgDFxagDj8dyMQpUuBsaizi4OaLVCyvBonaDL3K8MY/yItfipNSnMAUhQKx/JmEXiuyhbPQtKUEdVnW+8+U/s+E=
+  on:
+    repo: vdsabev/pathern
+  skip_cleanup: true
