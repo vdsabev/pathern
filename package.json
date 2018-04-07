@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.3",
   "name": "pathern",
   "description": "Minimalistic path pattern matching",
   "keywords": [
@@ -21,7 +21,9 @@
   "module": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build.tsc && npm run build.min",
+    "build.tsc": "tsc",
+    "build.min": "uglifyjs index.js > index.min.js",
     "test": "jest",
     "test.watch": "jest --watch"
   },
@@ -30,7 +32,8 @@
     "@types/jest": "22.2.2",
     "jest": "22.4.3",
     "ts-jest": "22.4.2",
-    "typescript": "2.8.1"
+    "typescript": "2.8.1",
+    "uglify-es": "3.3.9"
   },
   "jest": {
     "collectCoverage": true,
