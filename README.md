@@ -22,10 +22,10 @@ import * as pathern from 'pathern';
 
 ## replace
 ```ts
-pattern.replace('postContent/:postId', '1');                // 'postContent/1'
-pattern.replace('postContent/:postId', { postId: '1' });    // 'postContent/1'
-pattern.replace(':a/:b/:c', { a: '1', b: '2', c: '3' });    // '1/2/3'
-pattern.replace('$a\\$b\\$c', { a: '1', b: '2', c: '3' }, { // '1/2/3'
+pathern.replace('postContent/:postId', '1');                // 'postContent/1'
+pathern.replace('postContent/:postId', { postId: '1' });    // 'postContent/1'
+pathern.replace(':a/:b/:c', { a: '1', b: '2', c: '3' });    // '1/2/3'
+pathern.replace('$a\\$b\\$c', { a: '1', b: '2', c: '3' }, { // '1/2/3'
   prefix: '$',
   delimiter: '\\',
 });
@@ -33,7 +33,7 @@ pattern.replace('$a\\$b\\$c', { a: '1', b: '2', c: '3' }, { // '1/2/3'
 
 ## extract
 ```ts
-pattern.extract('a/:b/c', 'a/2/c'); // { b: '2' }
+pathern.extract('a/:b/c', 'a/2/c'); // { b: '2' }
 ```
 
 [build-badge]: https://img.shields.io/travis/vdsabev/pathern.svg?style=flat-square
