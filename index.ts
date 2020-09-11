@@ -1,13 +1,13 @@
 export const replace = (
-  pathPattern: string,
+  patternPath: string,
   data: string | Record<string, string>,
   { prefix = ':', delimiter = '/' } = {},
 ): string => {
   if (typeof data === 'string') {
-    return pathPattern.replace(getMatchRegex(prefix), data);
+    return patternPath.replace(getMatchRegex(prefix), data);
   }
 
-  const { pathFragments, isAMatch } = getMatches(pathPattern, prefix, delimiter);
+  const { pathFragments, isAMatch } = getMatches(patternPath, prefix, delimiter);
   return (
     pathFragments
       .map((fragment) => isAMatch(fragment) ? getDataByFragment(data, fragment, prefix) : fragment)
@@ -16,16 +16,16 @@ export const replace = (
 };
 
 export const extract = (
-  pathPattern: string,
+  patternPath: string,
   replacedPath: string,
   { prefix = ':', delimiter = '/' } = {},
 ): Record<string, string> => {
-  const pathWithoutPrefixRegex = new RegExp(pathPattern.replace(getMatchRegex(prefix), '\\w*'))
+  const pathWithoutPrefixRegex = new RegExp(patternPath.replace(getMatchRegex(prefix), '\\w*'))
   if (!pathWithoutPrefixRegex.test(replacedPath)) {
     return {}
   }
 
-  const { pathFragments, isAMatch } = getMatches(pathPattern, prefix, delimiter);
+  const { pathFragments, isAMatch } = getMatches(patternPath, prefix, delimiter);
   return (
     replacedPath
       .split(delimiter)
