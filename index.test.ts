@@ -48,20 +48,24 @@ describe(`pattern`, () => {
       expect(pathern.extract('a', '1')).toEqual({});
     });
 
-    it(`should return data if match found`, () => {
+    it(`should return data if empty match found`, () => {
       expect(pathern.extract('a/:b/c', 'a//c')).toEqual({ b: '' });
     });
 
-    it(`should return data if multiple matches found`, () => {
+    it(`should return data if string match found`, () => {
       expect(pathern.extract('a/:b/c', 'a/2/c')).toEqual({ b: '2' });
     });
 
-    it(`should ignore extra original fragments`, () => {
-      expect(pathern.extract('a/:b/c/d/:e/f', 'a/2/c')).toEqual({ b: '2' });
+    it(`should return data if multiple matches found`, () => {
+      expect(pathern.extract('a/:b/c/:d', 'a/2/c/4')).toEqual({ b: '2', d: '4' });
     });
 
-    it(`should ignore extra replaced fragments`, () => {
-      expect(pathern.extract('a/:b/c', 'a/2/c/a/4/c')).toEqual({ b: '2' });
+    it(`should return empty object if non-prefixed fragments don't match`, () => {
+      expect(pathern.extract('a/:b/c', 'x/2/c')).toEqual({});
+    });
+
+    it(`should return empty object if multiple non-prefixed fragments don't match`, () => {
+      expect(pathern.extract('a/:b/c/:d', 'a/2/y/4')).toEqual({});
     });
   });
 });
