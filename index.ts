@@ -1,3 +1,5 @@
+const token = '[\\w-]*';
+
 export const replace = (
   patternPath: string,
   data: string | Record<string, string>,
@@ -20,9 +22,9 @@ export const extract = (
   replacedPath: string,
   { prefix = ':', delimiter = '/' } = {},
 ): Record<string, string> => {
-  const pathWithoutPrefixRegex = new RegExp(patternPath.replace(getMatchRegex(prefix), '\\w*'))
+  const pathWithoutPrefixRegex = new RegExp(patternPath.replace(getMatchRegex(prefix), token));
   if (!pathWithoutPrefixRegex.test(replacedPath)) {
-    return {}
+    return {};
   }
 
   const { pathFragments, isAMatch } = getMatches(patternPath, prefix, delimiter);
@@ -39,7 +41,7 @@ export const extract = (
   );
 };
 
-const getMatchRegex = (prefix: string) => new RegExp(`\\${prefix}\\w*`, 'g');
+const getMatchRegex = (prefix: string) => new RegExp(`\\${prefix}${token}`, 'g');
 
 const getMatches = (path: string, prefix: string, delimiter: string) => {
   const pathFragments = path.split(delimiter);

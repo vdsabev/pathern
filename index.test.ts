@@ -68,6 +68,22 @@ describe(`pattern`, () => {
       expect(pathern.extract('a/:b/c/:d', 'a/2/y/4')).toEqual({});
     });
 
+    it(`returns data when the sole match contains a dash`, () => {
+      expect(pathern.extract('/document/:id', '/document/abc-def')).toEqual({ id: 'abc-def' });
+    });
+
+    it(`returns data when one of multiple matches contains a dash`, () => {
+      expect(
+        pathern.extract('/document/:type/:id', '/document/google-docs/abc'),
+      ).toEqual({ type: 'google-docs', id: 'abc' });
+    });
+
+    it(`returns data when multiple matches contain a dash`, () => {
+      expect(
+        pathern.extract('/document/:type/:id', '/document/google-docs/abc-def'),
+      ).toEqual({ type: 'google-docs', id: 'abc-def' });
+    });
+
     it(`return data with custom delimiter`, () => {
       expect(pathern.extract(
         'mnt/c/blog/posts/:postId/content.md',
