@@ -100,4 +100,26 @@ describe(`pattern`, () => {
       )).toEqual({ a: '1', b: '2', c: '3' });
     });
   });
+
+  describe(`matches`, () => {
+    it(`returns false for empty pattern match`, () => {
+      expect(pathern.matches('', 'a/1/c')).toBe(false);
+    });
+
+    it(`returns false for empty path match`, () => {
+      expect(pathern.matches('a/:b', '')).toBe(false);
+    });
+
+    it(`returns false for partial pattern match`, () => {
+      expect(pathern.matches('a/:b', 'a/1/c')).toBe(false);
+    });
+
+    it(`returns false for partial path match`, () => {
+      expect(pathern.matches('a/:b/c', 'a/1')).toBe(false);
+    });
+
+    it(`returns true for exact match`, () => {
+      expect(pathern.matches('a/:b/c', 'a/1/c')).toBe(true);
+    });
+  });
 });

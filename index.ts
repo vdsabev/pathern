@@ -1,15 +1,15 @@
 const token = '[\\w-]*';
 
 export const replace = (
-  patternPath: string,
+  pathPattern: string,
   data: string | Record<string, string>,
   { prefix = ':', delimiter = '/' } = {},
 ): string => {
   if (typeof data === 'string') {
-    return patternPath.replace(getMatchRegex(prefix), data);
+    return pathPattern.replace(getMatchRegex(prefix), data);
   }
 
-  const { pathFragments, isAMatch } = getMatches(patternPath, prefix, delimiter);
+  const { pathFragments, isAMatch } = getMatches(pathPattern, prefix, delimiter);
   return (
     pathFragments
       .map((fragment) => isAMatch(fragment) ? getDataByFragment(data, fragment, prefix) : fragment)
@@ -18,18 +18,18 @@ export const replace = (
 };
 
 export const extract = (
-  patternPath: string,
-  replacedPath: string,
+  pathPattern: string,
+  pathInstance: string,
   { prefix = ':', delimiter = '/' } = {},
 ): Record<string, string> => {
-  const pathWithoutPrefixRegex = new RegExp(patternPath.replace(getMatchRegex(prefix), token));
-  if (!pathWithoutPrefixRegex.test(replacedPath)) {
+  const pathWithoutPrefixRegex = new RegExp(pathPattern.replace(getMatchRegex(prefix), token));
+  if (!pathWithoutPrefixRegex.test(pathInstance)) {
     return {};
   }
 
-  const { pathFragments, isAMatch } = getMatches(patternPath, prefix, delimiter);
+  const { pathFragments, isAMatch } = getMatches(pathPattern, prefix, delimiter);
   return (
-    replacedPath
+    pathInstance
       .split(delimiter)
       .reduce<Record<string, string>>((data, replacedFragment, index) => {
         const originalFragment = pathFragments[index];
@@ -41,11 +41,19 @@ export const extract = (
   );
 };
 
+export const matches = (pathPattern: string, pathInstance: string) => {
+  const data = extract(pathPattern, pathInstance);
+  const hasData = Object.keys(data).length > 0;
+  const instanceMatchesPattern = replace(pathPattern, data) === pathInstance;
+
+  return hasData && instanceMatchesPattern;
+};
+
 const getMatchRegex = (prefix: string) => new RegExp(`\\${prefix}${token}`, 'g');
 
 const getMatches = (path: string, prefix: string, delimiter: string) => {
   const pathFragments = path.split(delimiter);
-  const pathMatches = path.match(getMatchRegex(prefix)) || [];
+  const pathMatches: string[] = path.match(getMatchRegex(prefix)) || [];
   const isAMatch = (fragment: string) => pathMatches.indexOf(fragment) !== -1;
 
   return { pathFragments, isAMatch };
