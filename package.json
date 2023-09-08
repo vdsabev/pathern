@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "name": "pathern",
   "description": "Minimalistic path pattern matching",
   "keywords": [
@@ -21,6 +21,7 @@
   "module": "index.js",
   "types": "index.d.ts",
   "scripts": {
+    "prepublishOnly": "npm test && npm run build",
     "build": "npm run build.tsc && npm run build.min",
     "build.tsc": "tsc",
     "build.min": "uglifyjs index.js > index.min.js",

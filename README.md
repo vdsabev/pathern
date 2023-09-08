@@ -36,6 +36,11 @@ pathern.replace('$a\\$b\\$c', { a: '1', b: '2', c: '3' }, { // '1/2/3'
 pathern.extract('a/:b/c', 'a/2/c'); // { b: '2' }
 ```
 
+## matches
+```ts
+pathern.matches('a/:b/c', 'a/2/c'); // true
+```
+
 [build-badge]: https://img.shields.io/travis/vdsabev/pathern.svg?style=flat-square
 [build]: https://travis-ci.org/vdsabev/pathern
 [coverage-badge]: https://img.shields.io/codecov/c/github/vdsabev/pathern.svg?style=flat-square
